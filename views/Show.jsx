@@ -1,6 +1,17 @@
 const { statement } = require('@babel/template');
 const React = require('react');
+const pieStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  fontFamily: 'Tahoma',
+  color: '#990000',
+  backgroundColor: '#FFFF99',
 
+}
+const buttonStyle = {
+  color: '#ffffff',
+  backgroundColor: '#556b2f'
+}
 
 
   class Show extends React.Component {
@@ -8,7 +19,8 @@ const React = require('react');
     const { product } = this.props
     let renderOrder = () => {
         if(product.stockQuantity > 0){
-            return <div>      
+            return <div>
+              <body style={pieStyle}>   
                 <form action={`/products/${this.props.product._id}?_method=PUT`}  method="POST">
                 <input type="hidden" name="name" defaultValue={this.props.product.name}/>
                 <br/>
@@ -16,8 +28,9 @@ const React = require('react');
                 <br />
                 <input type="hidden" name="stockQuantity" defaultValue={this.props.product.stockQuantity-1}/>
                 <br />
-                <input type="submit" value="ORDER"/>
+                <input style={buttonStyle} type="submit" value="ORDER"/>
         </form>
+        </body>   
         </div>
         } else {
             return <div><h3>OUT OF STOCK</h3></div>
@@ -25,7 +38,7 @@ const React = require('react');
     }
     return (
      <div>
-      <body>
+      <body style={pieStyle}>
       <h1>Signature Pies</h1>
       <h2>{product.name}</h2>
       <br /> 
@@ -37,10 +50,10 @@ const React = require('react');
         {product.price}
         <br />
         {renderOrder()}
-      <a href={'/products'}><input type='button' value='Back'/></a>
+      <a href={'/products'}><input style={buttonStyle} type='button' value='Back'/></a>
       </h3>
       <br/>
-      <a href={`/products/${product.id}/edit`}><input type='button' value='Additional Toppings'/></a>
+      <a href={`/products/${product.id}/edit`}><input style={buttonStyle} type='button' value='Additional Toppings'/></a>
       </body>
       </div>)
     }
